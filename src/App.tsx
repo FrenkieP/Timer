@@ -24,6 +24,16 @@ function App() {
     });
   };
 
+  const keyDown = (e: React.KeyboardEvent<HTMLElement>) => {
+    if (e.key === "Enter") {
+      console.log("enterkey pressed");
+      handleStart();
+      e.preventDefault();
+    } else {
+      e.preventDefault();
+    }
+  };
+
   useEffect(() => {
     if (toggleStart) {
       const interval = setInterval(() => {
@@ -63,7 +73,9 @@ function App() {
           {hours.toString().padStart(2, "0")}:{mins.toString().padStart(2, "0")}
           :{secs.toString().padStart(2, "0")}
         </h2>
-        <button onClick={handleStart}>{btntext}</button>
+        <button onClick={handleStart} onKeyDown={keyDown}>
+          {btntext}
+        </button>
       </div>
     </>
   );
